@@ -24,7 +24,7 @@ export function DRAMView({ memory, config, currentEvent }: DRAMViewProps) {
     }, [activeAddress]);
 
     return (
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col h-[500px]">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-md flex flex-col h-[672px]">
             <h2 className="text-xl font-bold mb-4">Main Memory (DRAM)</h2>
             <div className="flex-1 overflow-y-auto pr-2 space-y-1 custom-scrollbar" ref={scrollRef}>
                 {memory.map((value, address) => (

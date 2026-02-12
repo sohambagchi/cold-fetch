@@ -16,7 +16,7 @@ export function CacheGrid({ cache, config: _config, currentEvent }: CacheGridPro
     // const isMiss = currentEvent?.type === 'MISS';
 
     return (
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto">
+        <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto h-[672px] overflow-y-auto custom-scrollbar">
             <h2 className="text-xl font-bold mb-2">Cache Grid</h2>
             <div className="space-y-1 min-w-max">
                 {cache.map((set, setIndex) => (
