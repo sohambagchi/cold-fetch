@@ -1,5 +1,5 @@
 import type { CacheConfig } from '../lib/types';
-import { Play, Pause, RotateCcw, FastForward, Settings, Activity, Cpu } from 'lucide-react';
+import { Play, Pause, RotateCcw, FastForward, Settings, Activity } from 'lucide-react';
 
 interface ControlPanelProps {
     config: CacheConfig;
@@ -140,8 +140,8 @@ export function ControlPanel({
                                 key={policy}
                                 onClick={() => updateConfig({ writePolicy: policy as any })}
                                 className={`px-2 py-1 text-xs rounded transition-colors ${config.writePolicy === policy
-                                        ? 'bg-blue-600 text-white shadow-sm'
-                                        : 'text-gray-400 hover:text-gray-200'
+                                    ? 'bg-blue-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
                                     }`}
                             >
                                 {policy === 'write-back' ? 'Back' : 'Thru'}
@@ -157,8 +157,8 @@ export function ControlPanel({
                                 key={policy}
                                 onClick={() => updateConfig({ allocationPolicy: policy as any })}
                                 className={`px-2 py-1 text-xs rounded transition-colors ${config.allocationPolicy === policy
-                                        ? 'bg-blue-600 text-white shadow-sm'
-                                        : 'text-gray-400 hover:text-gray-200'
+                                    ? 'bg-blue-600 text-white shadow-sm'
+                                    : 'text-gray-400 hover:text-gray-200'
                                     }`}
                             >
                                 {policy === 'write-allocate' ? 'Alloc' : 'No Alloc'}
