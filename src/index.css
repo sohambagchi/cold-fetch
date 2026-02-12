@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3b82f6; /* Example custom theme config */
+}
+
+/* Custom global styles if any */
+body {
+  @apply bg-neutral-950 text-neutral-100 font-sans antialiased;
+}
