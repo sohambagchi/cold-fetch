@@ -36,13 +36,13 @@ export function ControlPanel({
 
     // determine event status visual
     let statusMessage = "Idle";
-    let statusColor = "bg-gray-800 border-gray-700 text-gray-500";
+    let statusColor = "bg-gray-100 dark:bg-gray-800 border-gray-200 dark:border-gray-700 text-gray-500";
 
     if (currentEvent) {
         switch (currentEvent.type) {
             case 'START':
                 statusMessage = "CPU Request";
-                statusColor = "bg-white text-gray-900 border-white";
+                statusColor = "bg-gray-50 dark:bg-white text-gray-900 border-gray-300 dark:border-white";
                 break;
             case 'CALCULATE_BITS':
                 statusMessage = "Decoding Address";
@@ -78,15 +78,15 @@ export function ControlPanel({
                 break;
             default:
                 statusMessage = currentEvent.type;
-                statusColor = "bg-gray-700 text-gray-300 border-gray-600";
+                statusColor = "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600";
         }
     }
 
     return (
-        <div className="bg-gray-800 p-3 rounded-lg shadow-md flex flex-wrap gap-4 items-stretch justify-between w-full border border-gray-700">
+        <div className="bg-white dark:bg-gray-800 p-3 rounded-lg shadow-md flex flex-wrap gap-4 items-stretch justify-between w-full border border-gray-200 dark:border-gray-700 transition-colors duration-300">
 
             {/* Group 1: Playback Controls (Stacked: Buttons Top, Slider Bottom) */}
-            <div className="flex flex-col gap-2 border-r border-gray-700 pr-4 min-w-[140px]">
+            <div className="flex flex-col gap-2 border-r border-gray-200 dark:border-gray-700 pr-4 min-w-[140px]">
                 {/* Buttons Row */}
                 <div className="flex justify-between gap-1">
                     <button
@@ -129,8 +129,8 @@ export function ControlPanel({
             </div>
 
             {/* Group 2: Configuration Sliders (Stacked Vertically) */}
-            <div className="flex items-center gap-3 border-r border-gray-700 pr-4">
-                <div className="flex flex-col gap-1 items-center justify-center text-gray-400 mr-1">
+            <div className="flex items-center gap-3 border-r border-gray-200 dark:border-gray-700 pr-4">
+                <div className="flex flex-col gap-1 items-center justify-center text-gray-500 dark:text-gray-400 mr-1">
                     <Settings size={16} />
                     <span className="text-[10px] uppercase">Config</span>
                 </div>
@@ -138,44 +138,44 @@ export function ControlPanel({
                 <div className="grid grid-cols-1 gap-y-1 w-48">
                     {/* Sets */}
                     <div className="flex items-center gap-2 text-xs">
-                        <span className="w-12 text-gray-500 text-[10px] uppercase">Sets</span>
+                        <span className="w-12 text-gray-600 dark:text-gray-500 text-[10px] uppercase">Sets</span>
                         <input
                             type="range"
                             min="0" max="6" step="1"
                             value={Math.log2(config.setCount)}
                             onChange={e => handlePowerChange('setCount', Math.pow(2, parseInt(e.target.value)))}
                             disabled={isProcessing}
-                            className="flex-1 accent-blue-500 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
+                            className="flex-1 accent-blue-500 h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
                         />
-                        <span className="w-8 text-right font-mono text-gray-300">{config.setCount}</span>
+                        <span className="w-8 text-right font-mono text-gray-800 dark:text-gray-300">{config.setCount}</span>
                     </div>
 
                     {/* Assoc */}
                     <div className="flex items-center gap-2 text-xs">
-                        <span className="w-12 text-gray-500 text-[10px] uppercase">Ways</span>
+                        <span className="w-12 text-gray-600 dark:text-gray-500 text-[10px] uppercase">Ways</span>
                         <input
                             type="range"
                             min="0" max="4" step="1"
                             value={Math.log2(config.associativity)}
                             onChange={e => handlePowerChange('associativity', Math.pow(2, parseInt(e.target.value)))}
                             disabled={isProcessing}
-                            className="flex-1 accent-green-500 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
+                            className="flex-1 accent-green-500 h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
                         />
-                        <span className="w-8 text-right font-mono text-gray-300">{config.associativity}</span>
+                        <span className="w-8 text-right font-mono text-gray-800 dark:text-gray-300">{config.associativity}</span>
                     </div>
 
                     {/* Block Size */}
                     <div className="flex items-center gap-2 text-xs">
-                        <span className="w-12 text-gray-500 text-[10px] uppercase">Block</span>
+                        <span className="w-12 text-gray-600 dark:text-gray-500 text-[10px] uppercase">Block</span>
                         <input
                             type="range"
                             min="2" max="6" step="1"
                             value={Math.log2(config.blockSize)}
                             onChange={e => handlePowerChange('blockSize', Math.pow(2, parseInt(e.target.value)))}
                             disabled={isProcessing}
-                            className="flex-1 accent-purple-500 h-1 bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
+                            className="flex-1 accent-purple-500 h-1 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer disabled:opacity-50"
                         />
-                        <span className="w-8 text-right font-mono text-gray-300">{config.blockSize}B</span>
+                        <span className="w-8 text-right font-mono text-gray-800 dark:text-gray-300">{config.blockSize}B</span>
                     </div>
                 </div>
             </div>
@@ -204,17 +204,17 @@ export function ControlPanel({
             </div>
 
             {/* Group 4: Policies & Info (Stacked compact) */}
-            <div className="flex flex-col gap-2 justify-center pl-4 border-l border-gray-700">
+            <div className="flex flex-col gap-2 justify-center pl-4 border-l border-gray-200 dark:border-gray-700">
                 <div className="flex gap-2">
                     {/* Write Policy */}
-                    <div className="flex bg-gray-900 rounded p-0.5 border border-gray-700">
+                    <div className="flex bg-gray-100 dark:bg-gray-900 rounded p-0.5 border border-gray-200 dark:border-gray-700">
                         {['write-back', 'write-through'].map((policy) => (
                             <button
                                 key={policy}
                                 onClick={() => updateConfig({ writePolicy: policy as 'write-back' | 'write-through' })}
                                 className={`px-1.5 py-0.5 text-[14px] uppercase rounded transition-colors ${config.writePolicy === policy
                                     ? 'bg-blue-600 text-white shadow-sm'
-                                    : 'text-gray-500 hover:text-gray-300'
+                                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300'
                                     }`}
                             >
                                 {policy === 'write-back' ? 'WB' : 'WT'}
@@ -222,14 +222,14 @@ export function ControlPanel({
                         ))}
                     </div>
                     {/* Alloc Policy */}
-                    <div className="flex bg-gray-900 rounded p-0.5 border border-gray-700">
+                    <div className="flex bg-gray-100 dark:bg-gray-900 rounded p-0.5 border border-gray-200 dark:border-gray-700">
                         {['write-allocate', 'no-write-allocate'].map((policy) => (
                             <button
                                 key={policy}
                                 onClick={() => updateConfig({ allocationPolicy: policy as 'write-allocate' | 'no-write-allocate' })}
-                                className={`px-1.5 py-0.5 text-[10px] uppercase rounded transition-colors ${config.allocationPolicy === policy
+                                className={`px-1.5 py-0.5 text-[14px] uppercase rounded transition-colors ${config.allocationPolicy === policy
                                     ? 'bg-blue-600 text-white shadow-sm'
-                                    : 'text-gray-500 hover:text-gray-300'
+                                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-500 dark:hover:text-gray-300'
                                     }`}
                             >
                                 {policy === 'write-allocate' ? 'WA' : 'NW'}
@@ -237,9 +237,9 @@ export function ControlPanel({
                         ))}
                     </div>
                 </div>
-                <div className="flex justify-between items-center text-[14px] text-gray-400">
+                <div className="flex justify-between items-center text-[14px] text-gray-600 dark:text-gray-400">
                     <span className="uppercase">Capacity:</span>
-                    <span className="font-mono text-white ml-2">{totalSize} B</span>
+                    <span className="font-mono text-gray-900 dark:text-white ml-2">{totalSize} B</span>
                 </div>
             </div>
 

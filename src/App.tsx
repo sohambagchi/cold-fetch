@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Moon, Sun } from 'lucide-react';
+
 import { useCacheEngine } from './hooks/useCacheEngine';
 import { ControlPanel } from './components/ControlPanel';
 import { AddressBus } from './components/AddressBus';
@@ -24,27 +24,10 @@ function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1000); // ms
 
-  // Dark Mode Logic
-  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') as 'dark' | 'light' || 'dark';
-    }
-    return 'dark';
-  });
-
+  // Enforce Dark Mode
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (theme === 'dark') {
-      root.classList.add('dark');
-    } else {
-      root.classList.remove('dark');
-    }
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
+    document.documentElement.classList.add('dark');
+  }, []);
 
   // Auto-play logic
   useEffect(() => {
@@ -78,13 +61,6 @@ function App() {
               </h1>
               <p className="text-gray-500 dark:text-gray-400 text-sm">Interactive Cache Hierarchy Visualizer</p>
             </div>
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-400 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
-              title={theme === 'dark' ? "Switch to Light Mode" : "Switch to Dark Mode"}
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
           </div>
 
           <div className="hidden lg:flex items-center space-x-4 text-xs text-gray-500 border border-gray-200 dark:border-gray-800 rounded-full px-6 py-2 bg-white/50 dark:bg-gray-900/30 shadow-sm dark:shadow-none transition-colors duration-300">
