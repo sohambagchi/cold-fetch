@@ -211,8 +211,8 @@ export function ControlPanel({
                         {['write-back', 'write-through'].map((policy) => (
                             <button
                                 key={policy}
-                                onClick={() => updateConfig({ writePolicy: policy as any })}
-                                className={`px-1.5 py-0.5 text-[10px] uppercase rounded transition-colors ${config.writePolicy === policy
+                                onClick={() => updateConfig({ writePolicy: policy as 'write-back' | 'write-through' })}
+                                className={`px-1.5 py-0.5 text-[14px] uppercase rounded transition-colors ${config.writePolicy === policy
                                     ? 'bg-blue-600 text-white shadow-sm'
                                     : 'text-gray-500 hover:text-gray-300'
                                     }`}
@@ -226,7 +226,7 @@ export function ControlPanel({
                         {['write-allocate', 'no-write-allocate'].map((policy) => (
                             <button
                                 key={policy}
-                                onClick={() => updateConfig({ allocationPolicy: policy as any })}
+                                onClick={() => updateConfig({ allocationPolicy: policy as 'write-allocate' | 'no-write-allocate' })}
                                 className={`px-1.5 py-0.5 text-[10px] uppercase rounded transition-colors ${config.allocationPolicy === policy
                                     ? 'bg-blue-600 text-white shadow-sm'
                                     : 'text-gray-500 hover:text-gray-300'
@@ -237,7 +237,7 @@ export function ControlPanel({
                         ))}
                     </div>
                 </div>
-                <div className="flex justify-between items-center text-[10px] text-gray-400">
+                <div className="flex justify-between items-center text-[14px] text-gray-400">
                     <span className="uppercase">Capacity:</span>
                     <span className="font-mono text-white ml-2">{totalSize} B</span>
                 </div>

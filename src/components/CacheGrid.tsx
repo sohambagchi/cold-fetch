@@ -9,14 +9,14 @@ interface CacheGridProps {
     currentEvent: CacheEvent | null;
 }
 
-export function CacheGrid({ cache, config: _config, currentEvent }: CacheGridProps) {
+export function CacheGrid({ cache, currentEvent }: CacheGridProps) {
     // Determine highlights from event
     const highlightSet = currentEvent?.payload?.setIndex;
     const highlightWay = currentEvent?.payload?.wayIndex;
     // const isMiss = currentEvent?.type === 'MISS';
 
     return (
-        <div className="bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto h-[672px] overflow-y-auto custom-scrollbar">
+        <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md overflow-x-auto h-[672px] overflow-y-auto custom-scrollbar border border-gray-200 dark:border-gray-700 transition-colors duration-300">
             <h2 className="text-xl font-bold mb-2">Cache Grid</h2>
             <div className="space-y-1 min-w-max">
                 {cache.map((set, setIndex) => (
@@ -25,10 +25,11 @@ export function CacheGrid({ cache, config: _config, currentEvent }: CacheGridPro
                         layout
                         className={clsx(
                             "flex gap-4 p-1 rounded transition-colors",
-                            highlightSet === setIndex ? "bg-gray-700 ring-2 ring-blue-500" : "bg-gray-900"
+                            highlightSet === setIndex ? "bg-blue-50 dark:bg-gray-700 ring-2 ring-blue-500" : "bg-gray-100 dark:bg-gray-900",
+                            "border border-gray-200 dark:border-gray-700"
                         )}
                     >
-                        <div className="w-16 flex-shrink-0 flex items-center justify-center border-r border-gray-700 font-mono text-xs text-gray-400">
+                        <div className="w-16 flex-shrink-0 flex items-center justify-center border-r border-gray-200 dark:border-gray-700 font-mono text-xs text-gray-500 dark:text-gray-400">
                             Set {setIndex}
                         </div>
 
@@ -44,7 +45,7 @@ export function CacheGrid({ cache, config: _config, currentEvent }: CacheGridPro
                                         className={clsx(
                                             "w-24 h-16 border-2 rounded flex flex-col items-center justify-center p-1 relative",
                                             // Validation Border
-                                            line.valid ? (line.dirty ? "border-red-500" : "border-green-500") : "border-gray-700 border-dashed",
+                                            line.valid ? (line.dirty ? "border-red-500" : "border-green-500") : "border-gray-300 dark:border-gray-700 border-dashed",
                                             // Highlight Active Way
                                             highlightSet === setIndex && highlightWay === wayIndex ? "ring-2 ring-yellow-400 shadow-lg" : ""
                                         )}
@@ -53,8 +54,8 @@ export function CacheGrid({ cache, config: _config, currentEvent }: CacheGridPro
                                             <span className="text-gray-600 text-[10px] text-center">Empty</span>
                                         ) : (
                                             <>
-                                                <div className="text-[10px] text-gray-400 mb-0.5">Tag: {formatHex(line.tag, 2)}</div>
-                                                <div className="font-mono font-bold text-white text-base">
+                                                <div className="text-[10px] text-gray-500 dark:text-gray-400 mb-0.5">Tag: {formatHex(line.tag, 2)}</div>
+                                                <div className="font-mono font-bold text-gray-900 dark:text-white text-base">
                                                     {line.data !== null ? line.data : '-'}
                                                 </div>
                                                 <div className="absolute top-1 right-1 flex gap-1">

@@ -189,7 +189,9 @@ export function useCacheEngine() {
         if (event.type === 'UPDATE_CACHE') {
             setCache(prev => {
                 const newCache = cloneCache(prev);
+                if (!event.payload) return newCache;
                 const { setIndex, wayIndex, tag, data, dirty } = event.payload;
+                if (setIndex === undefined || wayIndex === undefined) return newCache;
                 const line = newCache[setIndex].ways[wayIndex];
                 if (tag !== undefined) line.tag = tag;
                 if (data !== undefined) line.data = data;
@@ -201,7 +203,9 @@ export function useCacheEngine() {
         } else if (event.type === 'UPDATE_LRU') {
             setCache(prev => {
                 const newCache = cloneCache(prev);
+                if (!event.payload) return newCache;
                 const { setIndex, wayIndex } = event.payload;
+                if (setIndex === undefined || wayIndex === undefined) return newCache;
                 newCache[setIndex].ways[wayIndex].lastUsed = Date.now();
                 return newCache;
             });

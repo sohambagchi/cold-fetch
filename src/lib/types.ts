@@ -38,7 +38,15 @@ export type CacheEventType =
 export interface CacheEvent {
     type: CacheEventType;
     description: string;
-    payload?: any;
+    payload?: {
+        address?: number;
+        setIndex?: number;
+        wayIndex?: number;
+        data?: number | null;
+        tag?: number;
+        dirty?: boolean;
+        [key: string]: unknown;
+    };
 }
 
 export interface CacheStats {
